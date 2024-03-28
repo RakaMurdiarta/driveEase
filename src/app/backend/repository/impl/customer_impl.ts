@@ -28,7 +28,22 @@ class CustomerRepository implements ICustomer {
 
         @TODO : add data or record into customer table  
     */
-    return null;
+    const customer: Customer = await this.repository.customer.create({
+      data: {
+        email,
+        customerType: type,
+        password,
+        phone,
+        cname,
+        fullname,
+      },
+    });
+
+    if (!customer) {
+      throw new ApiError("failed to create customer");
+    } else {
+      return customer;
+    }
   }
 
   getCustomerByEmail = async (email: string): Promise<Customer | null> => {
@@ -37,8 +52,17 @@ class CustomerRepository implements ICustomer {
         @TODO : get customer by email
         @param:  email  
     */
+    const customer = await this.repository.customer.findFirst({
+      where: {
+        email,
+      },
+    });
 
-    return null;
+    if (!customer) {
+      return null;
+    }
+
+    return customer;
   };
 
   getCustomerById = async (custId: string): Promise<Customer | null> => {

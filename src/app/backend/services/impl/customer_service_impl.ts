@@ -100,8 +100,13 @@ class CustomerService implements ICustomerService {
         @TODO : call method insert from customer repository
         @param : email 
     */
+    const customer = await this.customerRepository.getCustomerByEmail(email);
 
-    return null;
+    if (!customer) {
+      return null;
+    }
+
+    return customer;
   };
 
   createRequestOwner = async (customerId: string): Promise<string> => {

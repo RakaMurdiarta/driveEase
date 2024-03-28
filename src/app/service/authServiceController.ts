@@ -42,7 +42,7 @@ export class AuthServiceController {
       @TODO : define api route for register into variable endpoint
       @type : string
     */
-    const endpoint = "";
+    const endpoint = "/api/v1/auth/register";
     const requestData = {
       customer_type: data.customer_type,
       email: data.email,

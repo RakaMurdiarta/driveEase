@@ -34,9 +34,18 @@ const Page = () => {
     /*
       @TODO : call register service here from class AuthServiceController
     */
-    alert(
-      "@TODO : call register service from class AuthServiceController on /src/app/(auth)/auth/register"
-    );
+
+    await authService
+      .register(data)
+      .then((resp) => {
+        toast.success("Successfully register proceed to log in!");
+        setTimeout(() => {
+          router.push("/auth/login");
+        }, 2500);
+      })
+      .catch((err) => {
+        toast.error(err.message ?? "Please try again!");
+      });
   };
 
   return (
