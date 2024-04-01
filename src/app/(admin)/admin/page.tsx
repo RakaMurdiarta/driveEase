@@ -6,13 +6,14 @@ import { CustomerListData } from "@/app/service/adminServiceController";
 import { adminservice } from "@/app/backend/services/impl/admin_service_impl";
 
 const Page = async () => {
+  
   let requestList: CustomerListData[] | [];
+  const getRequestList = async () => {
+    const data = adminservice.getListRequestOwner();
+    return data;
+  };
 
-  /*
-      @TODO : please get customerRequestList directly from prisma service;
-  */
-
-  requestList = [];
+  requestList = await getRequestList();
 
   return <AdminTable data={requestList} />;
 };

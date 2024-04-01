@@ -13,8 +13,8 @@ export class userServiceController {
       @TODO : define api route for requestOwner into variable endpoint
       @type : string
     */
-    const endpoint = "";
-    try {
+      const endpoint = "/api/v1/customer/request/owner";
+      try {
       const response = await axiosInstance.get(endpoint);
       return response;
     } catch (err: any) {

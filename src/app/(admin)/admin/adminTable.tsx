@@ -26,12 +26,15 @@ const AdminTable: FC<CustomerList> = ({ data }) => {
 
   const adminService = new adminServiceController();
   const approveOwner = async () => {
-    /*
-      @TODO : call approveOwner service here from class adminServiceController
-    */
-    alert(
-      "@TODO : call approveOwner service from class adminServiceController on /src/app/(admin)/admin/adminTable.tsx"
-    );
+    await adminService
+      .approveOwner(selectedId)
+      .then((resp) => {
+        window.location.reload();
+        toast.success("Approved!");
+      })
+      .catch((err : any) => {
+        toast.error(err.message ?? "Please try again!");
+      });
   };
   return (
     <>

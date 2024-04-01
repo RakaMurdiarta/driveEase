@@ -55,8 +55,8 @@ export class adminServiceController {
       @TODO : define api route for approveOwner into variable endpoint
       @type : string
     */
-    const endpoint = "";
-    try {
+      const endpoint = "/api/v1/admin/accept/request";
+      try {
       const response = await axios.post(endpoint, data);
       return response;
     } catch (err) {

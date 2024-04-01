@@ -29,34 +29,17 @@ class AdminService implements IAdminService {
   };
 
   acceptOwnerRequest = async (customerId: string): Promise<boolean> => {
-    /* 
-
-        @TODO : call method acceptRequestOwner from admin repository 
-        @Param : customerId
-        @Description : harcode set variable resp to true for exam purpose
-    */
-    const resp = true;
+    const resp = await this.adminrepo.acceptRequestOwner(customerId);
 
     if (resp) {
-      /* 
-        @TODO : call method insert from owner repository 
-        @Param : customerId
-    */
-      //@here
+      await this.ownerRepo.insert(customerId);
     }
-
+    //addOwner
     return resp;
   };
 
   getListRequestOwner = async (): Promise<OwnerRequestHistory[]> => {
-    //should remove this when get data from admin repository
-    const data: OwnerRequestHistory[] = [];
-    /* 
-        @TODO : call method getListRequesttOwner from admin repository 
-        @Param : customerId
-    */
-
-    return data;
+    return await this.adminrepo.getListRequesttOwner();
   };
 
   getAdminByEmail = async (
@@ -70,6 +53,7 @@ class AdminService implements IAdminService {
       }
 
       return admin
+
   };
 }
 

@@ -30,12 +30,16 @@ const Nav = ({ children, data }: { children: React.ReactNode; data: any }) => {
   const userService = new userServiceController();
 
   const requestOwner = async () => {
-    /*
-      @TODO : call requestOwner service here from class userServiceController
-    */
-    alert(
-      "@TODO : call requestOwner service from class vehicleServiceController on /src/app/(site)/nav.tsx"
-    );
+    await userService
+      .requestOwner()
+      .then((resp) => {
+        toast.success("Request has been sent!");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err ?? "Something went wrong!");
+        toast.error("Something went wrong!");
+      });
   };
 
   useEffect(() => {
