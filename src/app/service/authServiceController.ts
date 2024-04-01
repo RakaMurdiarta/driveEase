@@ -26,8 +26,8 @@ export class AuthServiceController {
       @type : string
     */
 
-    const endpoint = "";
-    try {
+      const endpoint = "/api/v1/auth/login";
+      try {
       const response = await axios.post(endpoint, data);
       return response;
     } catch (err) {

@@ -63,19 +63,13 @@ class AdminService implements IAdminService {
     email: string
   ): Promise<{ id: string; username: string; password: string } | null> => {
     //should remove this when get data from admin repository
-    const admin: { id: string; username: string; password: string } | null =
-      null;
+    const admin = await this.adminrepo.getAdminByEmail(email)    
 
-    /* 
-        @TODO : call method getAdminByEmail from admin repository 
-        @Param : email
-    */
+      if(!admin){
+        return null
+      }
 
-    if (!admin) {
-      return null;
-    }
-
-    return admin;
+      return admin
   };
 }
 
