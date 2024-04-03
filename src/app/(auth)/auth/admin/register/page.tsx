@@ -27,9 +27,17 @@ const Page = () => {
     /*
       @TODO : call register admin service here from class adminServiceController
     */
-    alert(
-      "@TODO : call register admin service from class adminServiceController on /src/app/(auth)/auth/admin/register"
-    );
+    await adminService
+      .register(data)
+      .then((resp) => {
+        toast.success("Register Succesful!");
+        setTimeout(() => {
+          router.push("/");
+        }, 2500);
+      })
+      .catch((err) => {
+        toast.error(err.message ?? "Please try again!");
+      });
   };
 
   return (

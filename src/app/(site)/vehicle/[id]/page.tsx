@@ -6,11 +6,13 @@ import { Vehicle } from "@prisma/client";
 const Page = async ({ params }: { params: { id: string } }) => {
   let vehicleData: Vehicle | null;
 
-  /*
-      @TODO : please get vehicleByID directly from prisma service;
-  */
+  const getDetailVehicle = async (id: string) => {
+    const vehicle = newVehicleServices.getVehicleById(id);
+    return vehicle;
+  };
 
-  vehicleData = null;
+  vehicleData = (await getDetailVehicle(params.id)) as Vehicle;
+  console.log(vehicleData);
 
   return <DetailVehicles vehicle={vehicleData} />;
 };

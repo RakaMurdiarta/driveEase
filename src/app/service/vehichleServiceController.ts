@@ -79,11 +79,7 @@ const domainUrl = process.env.NEXT_PUBLIC_DOMAIN_URL;
 
 export class vehicleServiceController {
   public async rent(data: Rent): Promise<ApiResponse<any>> {
-    /*
-      @TODO : define api route for rent vehicle into variable endpoint
-      @type : string
-    */
-    const endpoint = "";
+    const endpoint = "/api/v1/customer/rent";
     try {
       const response = await axiosInstance.post(endpoint, data);
       console.log("data");
@@ -94,12 +90,8 @@ export class vehicleServiceController {
     }
   }
   public async return(id: string): Promise<ApiResponse<any>> {
-    /*
-      @TODO : define api route for return vehicle into variable endpoint
-      @type : string
-    */
-    const endpoint = "";
-    try {
+      const endpoint = "/api/v1/customer/return";
+      try {
       const response = await axiosInstance.post(endpoint, { invoice_id: id });
       console.log("data");
       return response;

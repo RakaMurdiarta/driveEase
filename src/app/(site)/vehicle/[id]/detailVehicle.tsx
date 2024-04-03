@@ -46,12 +46,22 @@ const DetailVehicles: FC<prop> = ({ vehicle }) => {
 
   const vehicleService = new vehicleServiceController();
   const rent = async (values: DateRangeType) => {
-    /*
-      @TODO : call rentVehicle service here from class vehicleServiceController
-    */
-    alert(
-      "@TODO : call rentVehicle service from class vehicleServiceController on /src/app/(site)/vehicle/[id]/detailVehicle.tsx"
-    );
+    const data: Rent = {
+      from: values.startDate as string,
+      until: values.endDate as string,
+      total: vehicle !== null ? vehicle.price : 0,
+      vehicle_id: vehicle !== null ? vehicle.id : "",
+    };
+    console.log(data);
+    await vehicleService
+      .rent(data)
+      .then((resp) => {
+        toast.success("Vehicle Rented!");
+        router.push("/my/rented");
+      })
+      .catch((err) => {
+        toast.error(err.message ?? "Please try again!");
+      });
   };
 
   return (
