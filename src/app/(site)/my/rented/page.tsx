@@ -18,7 +18,9 @@ const Page = async () => {
 
   let rentedVehicles: Rental[];
 
-  rentedVehicles = [];
+  rentedVehicles = (await customerService.getListRentByCustomerId(
+    userId
+  )) as Rental[];
 
   return <RentedVehicles data={rentedVehicles} />;
 };

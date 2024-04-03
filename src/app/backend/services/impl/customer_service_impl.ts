@@ -65,15 +65,7 @@ class CustomerService implements ICustomerService {
     vehicle: Omit<Vehicle, "id" | "ownerId">,
     customer_id: string
   ): Promise<Vehicle> => {
-    const cvehicle: Vehicle | null = null;
-    const owner: Owner | null = null;
-
-    /* 
-
-        @TODO : call method getOwnerByCustomerId from owner repository 
-        @Description : check is customer is owner or not before add vehicle
-
-    */
+    const owner = await this.ownerRepo.getOwnerByCustomerId(customer_id);
 
     if (!owner) {
       throw new ApiError(
@@ -82,11 +74,13 @@ class CustomerService implements ICustomerService {
       );
     }
 
-    /* 
+    const data = {
+      ...vehicle, //spread operator
+      ownerId: owner.id,
+    };
 
-        @TODO : call method addVehicle from vehicle repository 
-    */
-    //post vehicle
+    const cvehicle = await this.vehicleRepo.addVehicle(data);
+
     if (!cvehicle) {
       throw new ApiError("failed post vehicle", HttpStatusCode.BadRequest);
     }

@@ -66,13 +66,17 @@ class CustomerRepository implements ICustomer {
   };
 
   getCustomerById = async (custId: string): Promise<Customer | null> => {
-    /* 
+    const customer = await this.repository.customer.findFirst({
+      where: {
+        id: custId,
+      },
+    });
 
-        @TODO : get data or record by customer id
-        @param: customer id  
-    */
+    if (!customer) {
+      return null;
+    }
 
-    return null;
+    return customer;
   };
 
   requestOwner = async (customerId: string): Promise<string | null> => {

@@ -6,11 +6,13 @@ import { Vehicle } from "../service/vehichleServiceController";
 
 const Page = async () => {
   let allVehicle: Vehicle[] | [];
-  /*
-      @TODO : please get allVehicleList directly from prisma service;
-  */
+  
+  const getAllVehicle = async () => {
+    const vehicle = newVehicleServices.getListvehicles();
+    return vehicle;
+  };
 
-  allVehicle = []; //put here
+  allVehicle = (await getAllVehicle()) as Vehicle[];
 
   return <VehicleList data={allVehicle} />;
 };

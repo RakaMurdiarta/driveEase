@@ -15,11 +15,12 @@ const Page = async () => {
 
   let myVehicle: Vehicle[] | [];
 
-  /*
-      @TODO : please get customerVehicleList directly from prisma service;
-  */
+  const getVehicleByCustomer = async (id: string) => {
+    const data = await customerService.getListVehicleByCustomerId(id);
+    return data;
+  };
 
-  myVehicle = [];
+  myVehicle = await getVehicleByCustomer(userId);
 
   return <MyVehicles data={myVehicle} />;
 };

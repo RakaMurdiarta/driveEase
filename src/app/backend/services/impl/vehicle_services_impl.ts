@@ -14,13 +14,7 @@ class VehicleServices implements IVehicleServices {
   }
 
   getListvehicles = async (): Promise<Vehicle[]> => {
-    /* 
-
-        @TODO : call method getListVehicles from vehicle repository 
-    */
-
-    //should remove this when get data from admin repository
-    const vehicles: Vehicle[] = [];
+    const vehicles = await this.vehicleRepo.getListVehicles();
 
     if (!vehicles) {
       throw new ApiError(
@@ -33,11 +27,8 @@ class VehicleServices implements IVehicleServices {
   };
 
   getVehicleById = async (vId: string): Promise<Vehicle> => {
-    const vehicle: Vehicle | null = null;
 
-    /* 
-        @TODO : call method getVehicleById from vehicle repository 
-    */
+    const vehicle = await this.vehicleRepo.getVehicleById(vId)
 
     if (!vehicle) {
       throw new ApiError("failed get vehicle", HttpStatusCode.BadRequest);

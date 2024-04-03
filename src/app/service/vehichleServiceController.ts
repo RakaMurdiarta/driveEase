@@ -106,7 +106,7 @@ export class vehicleServiceController {
       @TODO : define api route for post vehicle into variable endpoint
       @type : string
     */
-    const endpoint = "";
+    const endpoint = "/api/v1/customer/post/vehicle";
     try {
       const response = await axiosInstance.post(endpoint, data);
       return response;

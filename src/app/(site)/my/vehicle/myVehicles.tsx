@@ -35,9 +35,16 @@ const MyVehicles: FC<prop> = ({ data }) => {
     /*
       @TODO : call addVehicle service here from class vehicleServiceController
     */
-    alert(
-      "@TODO : call addVehicle service from class vehicleServiceController on /src/app/(site)/my/vehicle/myVehicle.tsx"
-    );
+
+    await vehicleService
+      .add(data)
+      .then((resp) => {
+        toast.success("Vehicle added!");
+        window.location.reload();
+      })
+      .catch((err) => {
+        toast.error(err.message ?? "Please try again!");
+      });
   };
 
   return (

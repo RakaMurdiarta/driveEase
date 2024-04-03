@@ -10,30 +10,50 @@ export class RentRepository implements IRent {
   }
 
   insert = async (rent: Omit<Rents, "id">): Promise<Rents | null> => {
-    /* 
+    const resp = await this.repository.rents.create({
+      data: {
+        startDate: rent.startDate,
+        returnDate: rent.returnDate,
+        amountDue: rent.amountDue,
+        active: rent.active,
+        noOfDays: rent.noOfDays,
+        customerId: rent.customerId,
+        vehicleId: rent.vehicleId,
+      },
+    });
 
-        @TODO : add data or record into rent table  
-    */
-    return null;
+    if (!resp) {
+      return null;
+    }
+
+    return resp;
   };
 
   getRentById = async (rent_id: string): Promise<Rents | null> => {
-    /* 
+    const rent = await this.repository.rents.findFirst({
+      where: {
+        id: rent_id,
+      },
+      include: { customer: true, vehicle: true },
+    });
 
-        @TODO : get data or record by rent id
-        @param: rent id  
-    */
-
-    return null;
+    if (!rent) {
+      return null;
+    }
+    return rent;
   };
 
   getListRentByCustomerId = async (custId: string): Promise<Rents[] | []> => {
-    /* 
+    const rent = await this.repository.rents.findMany({
+      where: {
+        customer: { id: custId },
+      },
+      include: { customer: true, vehicle: true },
+    });
 
-        @TODO : get list of data or record by customer id
-        @param: customer id  
-    */
-
-    return [];
+    if (rent.length <= 0) {
+      return [];
+    }
+    return rent;
   };
 }
